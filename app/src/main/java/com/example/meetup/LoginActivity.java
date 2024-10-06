@@ -4,26 +4,25 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import android.view.LayoutInflater;
+import android.view.View;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextInputEditText edit_gmail_login,edit_Password_login;
+    TextInputEditText edit_gmail_login, edit_Password_login;
     Button login_button;
     TextView signUp_text;
-    ProgressBar progressBar;
-
-    // Check if user is signed in (non-null) and update UI accordingly.
+    private FirebaseAuth auth;
 
     @Override
     protected void onStart() {
@@ -33,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
     }
-    private FirebaseAuth auth;
+
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         edit_Password_login = findViewById(R.id.edit_Password_login);
         edit_gmail_login = findViewById(R.id.edit_gmail_login);
         login_button = findViewById(R.id.login_button);
-        signUp_text=findViewById(R.id.signUp_text);
-        progressBar=findViewById(R.id.progressBar);
+        signUp_text = findViewById(R.id.signUp_text);
 
         auth = FirebaseAuth.getInstance();
 
@@ -56,20 +54,20 @@ public class LoginActivity extends AppCompatActivity {
             String Password = edit_Password_login.getText().toString();
 
             if (TextUtils.isEmpty(gmail) || TextUtils.isEmpty(Password)) {
-                Toast.makeText(LoginActivity.this, "fill properly", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Fill properly", Toast.LENGTH_SHORT).show();
                 return;
-            }
-            else if (Password.length() < 4) {
-                Toast.makeText(LoginActivity.this, "Password must be greater then 4 characters", Toast.LENGTH_SHORT).show();
+            } else if (Password.length() < 4) {
+                Toast.makeText(LoginActivity.this, "Password must be greater than 4 characters", Toast.LENGTH_SHORT).show();
                 return;
-            }else {
-                progressBar.setVisibility(View.VISIBLE);
+            } else {
+                // Show progress dialog when starting the login process
+                AlertDialog progressDialog = showProgressDialog();
+
                 auth.signInWithEmailAndPassword(gmail, Password)
                         .addOnCompleteListener(this, task -> {
+                            progressDialog.dismiss(); // Dismiss progress dialog once task is complete
                             if (task.isSuccessful()) {
-
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                progressBar.setVisibility(View.GONE);
                                 finish();
                             } else {
                                 handleSignInError(task.getException());
@@ -77,15 +75,26 @@ public class LoginActivity extends AppCompatActivity {
                         });
             }
         });
-}
-     //If the user is put the wrong password or email or if the internet of the device is not connected.
+    }
 
+    private AlertDialog showProgressDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.progress_dialog, null);
+        builder.setView(dialogView);
+        builder.setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        return dialog;
+    }
+
+    // Handle sign-in errors (wrong email/password, no internet, etc.)
     private void handleSignInError(Exception exception) {
-        if (exception instanceof FirebaseAuthInvalidCredentialsException){
-            Toast.makeText(this, "No user founded with this email", Toast.LENGTH_SHORT).show();
-        }else if (exception instanceof FirebaseAuthInvalidUserException){
+        if (exception instanceof FirebaseAuthInvalidCredentialsException) {
+            Toast.makeText(this, "No user found with this email", Toast.LENGTH_SHORT).show();
+        } else if (exception instanceof FirebaseAuthInvalidUserException) {
             Toast.makeText(this, "Invalid password. Please try again.", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Toast.makeText(this, "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show();
         }
     }

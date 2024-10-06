@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = edit_Password.getText().toString();
                 String name = name_cloud.getText().toString();
 
+                AlertDialog dialog = showProgressDialog();
 
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)|| TextUtils.isEmpty(name)) {
                     Toast.makeText(RegisterActivity.this, "fill properly", Toast.LENGTH_SHORT).show();
@@ -67,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Password is too short", Toast.LENGTH_SHORT).show();
                 } else {
                     RegisterUser(email, password);
-                    progressBar2.setVisibility(View.VISIBLE);
+                    dialog.show();
                 }
             }
     private void RegisterUser(String email,String password) {
@@ -75,15 +78,16 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
+                AlertDialog dialog = showProgressDialog();
                 if (task.isSuccessful()) {
 
                     Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
                     startActivity(intent);
-                    progressBar2.setVisibility(View.GONE);
+
                     finish();
                 }
                  else {
-                     progressBar2.setVisibility(View.GONE);
+                    dialog.dismiss();
                     Toast.makeText(RegisterActivity.this, "Failed to Register", Toast.LENGTH_SHORT).show();
 
                 }
@@ -94,5 +98,17 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+
+
+    }
+    private AlertDialog showProgressDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.progress_dialog, null);
+        builder.setView(dialogView);
+        builder.setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        return dialog;
     }
 }
