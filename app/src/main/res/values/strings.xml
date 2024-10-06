@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MeetUp</string>
+    <string name="welcome">Welcome To,</string>
+    <string name="wel">Welcome ,</string>
+    <string name="enter_room_name">Enter Room Id</string>
+    <string name="join">Join</string>
+    <string name="name">Enter Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">LogIn</string>
+    <string name="signup">SignUp</string>
+    <string name="text">"If you didn't have any account Please "</string>
+    <string name="sure">Are you sure to logout ?</string>
+    <string name="no">No\n</string>
+    <string name="yes">Yes</string>
+
+</resources>

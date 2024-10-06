@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "431198481887",
+    "firebase_url": "https://meetup-553a2-default-rtdb.firebaseio.com",
+    "project_id": "meetup-553a2",
+    "storage_bucket": "meetup-553a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431198481887:android:34e9ece6341368d8e0286a",
+        "android_client_info": {
+          "package_name": "com.example.meetup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNEOSKFWNQ-hU-nrmJv9oImzExLphl5Rg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

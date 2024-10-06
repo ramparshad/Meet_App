@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/blue"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/back"
+        >
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="15dp"
+        android:fontFamily="@font/bagel_fat_one"
+        android:text="@string/welcome"
+        android:textColor="@color/white"
+        android:textSize="45sp"
+        android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/logout_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/logout"
+
+            tools:ignore="SpeakableTextPresentCheck" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/text1"
+        android:layout_below="@+id/text1"
+        android:fontFamily="@font/bagel_fat_one"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="45sp"
+        android:layout_marginBottom="25dp"
+        android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="20dp"
+        >
+
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingStart="15dp"
+        android:hint="@string/enter_room_name"
+        android:fontFamily="serif-monospace"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:background="@null"
+        android:inputType="text"
+        />
+    </androidx.cardview.widget.CardView>
+    <Button
+        android:id="@+id/btn_join"
+        android:layout_width="199dp"
+        android:layout_height="50dp"
+        android:text="@string/join"
+        android:onClick="joinMeeting"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:textSize="20sp"
+        android:backgroundTint="@color/yellow"
+        android:layout_gravity="center"
+        android:elevation="20dp"
+        />
+</LinearLayout>

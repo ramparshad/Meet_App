@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+    <RelativeLayout
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow"
+        android:elevation="6dp"
+        android:outlineAmbientShadowColor="@color/black"
+        android:layout_centerInParent="true"
+        tools:ignore="UnusedAttribute">
+
+        <ImageView
+            android:id="@+id/image_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:id="@+id/text"
+            android:layout_below="@+id/image_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/sure"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <Button
+            android:id="@+id/no_btn"
+            android:layout_width="130dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/text"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/black"
+            android:paddingTop="8dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/no"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/yes_btn"
+            android:layout_width="130dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/text"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/black"
+            android:layout_marginTop="30dp"
+            android:paddingTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/yes"
+            tools:ignore="TouchTargetSizeCheck" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
