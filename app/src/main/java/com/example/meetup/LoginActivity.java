@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         return dialog;
     }
 
-    // Handle sign-in errors (wrong email/password)
+    // Handle sign-in errors (wrong email/)
     private void handleSignInError(Exception exception) {
         if (exception instanceof FirebaseAuthInvalidCredentialsException) {
             Toast.makeText(this, "No user found with this email", Toast.LENGTH_SHORT).show();
